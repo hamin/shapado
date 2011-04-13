@@ -1,8 +1,9 @@
 source 'http://rubygems.org'
 
-gem "rails", "~> 2.3.11"
-gem "bson_ext",  "1.1.4"
-gem "mongo", "1.1.4"
+# gem "rails", "2.3.11"
+gem "rails", "3.0.6"
+gem "bson_ext",  "1.3.0"
+gem "mongo", "1.3.0"
 gem "plucky", "0.3.6"
 
 if RUBY_PLATFORM !~ /mswin|mingw/
@@ -26,8 +27,9 @@ gem "magent", "0.4.2"
 gem "differ", "0.1.1"
 gem 'super_exception_notifier', '~> 2.0.0', :require => 'exception_notifier'
 gem "warden"
-gem "dcu-devise", "1.0.7", :require => "devise"
-gem "twitter-text", "1.1.1"
+# gem "dcu-devise", "1.0.7", :require => "devise"
+gem "devise", "1.1.2"
+gem "twitter-text", "1.3.1"
 gem "oauth2", "0.0.8"
 gem "twitter_oauth", "0.4.3"
 gem "rack-recaptcha", "0.2.2", :require => "rack/recaptcha"
