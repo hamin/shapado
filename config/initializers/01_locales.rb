@@ -26,7 +26,7 @@ I18n.backend.store_translations 'sv', {}
 I18n.backend.store_translations 'te', {}
 I18n.backend.store_translations 'zh-CN', {}
 
-I18n.load_path << Dir[ File.join(Rails.root, 'config', 'locales', '**', '*.{rb,yml}') ]
+I18n.load_path += Dir[ File.join(Rails.root, 'config', 'locales', '**', '*.{rb,yml}') ]
 
 # You need to "force-initialize" loaded locales
 I18n.backend.send(:init_translations)
@@ -37,8 +37,26 @@ AVAILABLE_LANGUAGES = I18n.backend.available_locales.map { |l| l.to_s.split("-")
 ## this is only for the user settings, not related to translatewiki.net
 DEFAULT_USER_LANGUAGES = ['en', 'es', 'es-419', 'fr', 'pl', 'pt-BR', 'pt-PT', 'ja', 'el', 'de', 'ko', 'nl', 'ru', 'tl', 'it']
 
-RAILS_DEFAULT_LOGGER.debug "* Loaded locales: #{AVAILABLE_LOCALES.inspect}"
+Rails.logger.debug "* Loaded locales: #{AVAILABLE_LOCALES.inspect}"
 
 require "i18n/backend/fallbacks"
 I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
 I18n.default_locale = :"en"
+
+
+extract_keys = lambda do |hash, str, keys|
+  hash.each do |k,v|
+    s = str.empty? ? k.to_s : str+".#{k}"
+    if v.kind_of?(Hash)
+      extract_keys.call(v, s, keys)
+    else
+      keys << s if s =~ /badge|layout/
+    end
+  end
+
+  keys
+end
+
+CUSTOMIZABLE_I18N_KEYWORDS = Set.new
+extract_keys.call(I18n.backend.send(:translations)[:en], "", CUSTOMIZABLE_I18N_KEYWORDS)
+
