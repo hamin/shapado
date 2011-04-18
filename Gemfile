@@ -15,7 +15,8 @@ end
 
 gem "jnunemaker-validatable", "1.8.4", :require => "validatable"
 gem "mongo_mapper", "0.8.6"
-gem "compass", "0.10.5", :require => "compass"
+gem 'smart_asset'
+gem "compass", "0.10.5"
 gem "fancy-buttons", "0.5.5"
 gem "compass-colors", "0.3.1"
 gem "mongomapper_ext", "0.5.0"
