@@ -50,7 +50,7 @@ Shapado::Application.routes.draw do
   resources :adbards
   resources :badges
 
-  resources :searches, :path => "search", :as => "search"
+  # resources :searches, :path => "search", :as => "search"
 
   resources :pages do
     member do
@@ -140,7 +140,7 @@ Shapado::Application.routes.draw do
 
 
   match 'questions/tags/:tags' => 'tags#show', :as => :question_tag
-#   match 'questions/unanswered/tags/:tags' => 'questions#unanswered'
+  match 'questions/unanswered/tags/:tags' => 'questions#unanswered'
 
   resources :groups do
     collection do
@@ -202,7 +202,7 @@ Shapado::Application.routes.draw do
   end
 
   match '/moderate' => 'moderate/questions#index'
-#   match '/search' => 'searches#index', :as => :search
+  match '/search' => 'searches#index', :as => :search
   match '/about' => 'groups#show', :as => :about
   root :to => 'questions#index'
   match '/:controller(/:action(/:id))'
